@@ -1,4 +1,5 @@
 import tkinter
+from gameBoardStandard import TicTacToeBoard
 
 def main():
     """Create the game's board and run its main loop."""
