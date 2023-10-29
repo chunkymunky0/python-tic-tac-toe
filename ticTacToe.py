@@ -1,9 +1,10 @@
 from gui import *
-from impossibleBot import *
+#from impossibleBot import *
 from normalBot import *
 
 # used for bot algorithms
-def minimax(board, isMaximizing):
+
+"""def minimax(board, isMaximizing):
     if checkWhichMarkWon(computer):
         return 1 
     elif checkWhichMarkWon(player):
@@ -12,7 +13,7 @@ def minimax(board, isMaximizing):
         return 0
         
     if isMaximizing:
-        bestScore = -800 
+        bestScore = -800
         for key in board.keys():
             if board[key] == ' ':
                 board[key] = computer 
@@ -30,7 +31,7 @@ def minimax(board, isMaximizing):
                 board[key] = ' '
                 if score < bestScore:
                     bestScore = score 
-        return bestScore
+        return bestScore"""
 
 def main():
     """Create the game's board and run its main loop."""
