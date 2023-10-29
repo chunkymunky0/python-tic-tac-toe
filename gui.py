@@ -5,36 +5,31 @@ class TicTacToeBoard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Tic-Tac-Toe Game")
-        self._create_board_display()
+        self.configure(bg="#3498db")  # blue
         self._create_board_grid()
 
-    def _create_board_display(self):
-        display_frame = tk.Frame(master=self)
-        display_frame.pack(fill=tk.X)
-        self.display = tk.Label(
-            master=display_frame,
-            text="Ready?",
-            font=font.Font(size=28, weight="bold"),
-        )
-        self.display.pack()
-
     def _create_board_grid(self):
-        grid_frame = tk.Frame(master=self)
-        grid_frame.pack()
         for row in range(3):
-            self.rowconfigure(row, weight=1, minsize=50)
-            self.columnconfigure(row, weight=1, minsize=75)
+            self.rowconfigure(row, weight=1, minsize=150)
             for col in range(3):
-                button = tk.Button(
-                    master=grid_frame,
+                self.columnconfigure(col, weight=1, minsize=150)
+
+                frame = tk.Frame(
+                    master=self,
+                    relief=tk.RAISED,
+                    borderwidth=1,
+                    bg="#ecf0f1"  #light gray
+                )
+                frame.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
+
+                label = tk.Label(
+                    master=frame,
                     text="",
                     font=font.Font(size=36, weight="bold"),
-                    fg="black",
-                    width=3,
-                    height=2,
-                    highlightbackground="lightblue",
+                    fg="#2c3e50",  # dark gray
+                    bg="#ecf0f1"
                 )
-                button.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
+                label.pack(fill=tk.BOTH, expand=True)
 
 def main():
     board = TicTacToeBoard()
