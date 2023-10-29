@@ -13,7 +13,7 @@ class TicTacToeBoard(tk.Tk):
             self.rowconfigure(row, weight=1, minsize=150)
             for col in range(3):
                 self.columnconfigure(col, weight=1, minsize=150)
-# sfsdfsfsdfs
+
                 frame = tk.Frame(
                     master=self,
                     relief=tk.RAISED,
