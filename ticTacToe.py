@@ -2,9 +2,11 @@ from gui import *
 #from impossibleBot import *
 from normalBot import *
 from menu import *
+from PIL import ImageTk, Image
+
+
 
 # used for bot algorithms
-
 """def minimax(board, isMaximizing):
     if checkWhichMarkWon(computer):
         return 1 
