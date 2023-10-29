@@ -1,4 +1,5 @@
 from gui import *
+from ticTacToe import *
 
 def spaceAvailable(r, c):
     if [position] == '0':
@@ -33,27 +34,6 @@ def impBotMove():
     return 
 
 
-        
-    if isMaximizing:
-        bestScore = -800 
-        for key in board.keys():
-            if board[key] == ' ':
-                board[key] = computer 
-                score = minimax(board, False)
-                board[key] = ' '
-                if score > bestScore:
-                    bestScore = score
-        return bestScore 
-    else:
-        bestScore = 800 
-        for key in board.keys():
-            if board[key] == ' ':
-                board[key] = player 
-                score = minimax(board, True)
-                board[key] = ' '
-                if score < bestScore:
-                    bestScore = score 
-        return bestScore
 
 
 while not checkWin():
