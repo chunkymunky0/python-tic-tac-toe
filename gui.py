@@ -36,10 +36,3 @@ class TicTacToeBoard(tk.Tk):
 
     def click_button():
         pass
-
-def main():
-    board = TicTacToeBoard()
-    board.mainloop()
-
-if __name__ == "__main__":
-    main()
