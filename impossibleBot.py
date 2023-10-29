@@ -1,4 +1,9 @@
+from gui import *
 
+def spaceAvailable(r, c):
+    if [position] == '0':
+        return True 
+    return False 
 
 def make_best_move():
     bestScore = -math.inf
@@ -12,17 +17,45 @@ def make_best_move():
             bestMove = move
     ticTacBoard.make_move(bestMove)
 
-def minimax(isMaxTurn, maximizerMark, board):
-    state = board.get_state()
-    if (state is State.DRAW):
-        return 0
-    elif (state is State.OVER):
-        return 1 if board.get_winner() is maximizerMark else -1
 
-    scores = []
-    for move in board.get_possible_moves():
-        board.make_move(move)
-        scores.append(minimax(not isMaxTurn, maximizerMark, board))
-        board.undo()
+def impBotMove():
+    bestScore = -800
+    bestMove = 0
+    for key in board.keys():
+        if board[key] == ' ':
+            board[key] = computer
+            score = minimax(board, False)
+            board[key] = ' '
+            if score > bestScore:
+                bestScore = score 
+                bestMove = key
+    insertLetter(computer, bestMove)
+    return 
 
-    return max(scores) if isMaxTurn else min(scores)
+
+        
+    if isMaximizing:
+        bestScore = -800 
+        for key in board.keys():
+            if board[key] == ' ':
+                board[key] = computer 
+                score = minimax(board, False)
+                board[key] = ' '
+                if score > bestScore:
+                    bestScore = score
+        return bestScore 
+    else:
+        bestScore = 800 
+        for key in board.keys():
+            if board[key] == ' ':
+                board[key] = player 
+                score = minimax(board, True)
+                board[key] = ' '
+                if score < bestScore:
+                    bestScore = score 
+        return bestScore
+
+
+while not checkWin():
+    impBotMove()
+    playerMove()
