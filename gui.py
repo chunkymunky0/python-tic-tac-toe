@@ -7,7 +7,10 @@ class TicTacToeBoard(tk.Tk):
         super().__init__()
         self.title("Tic-Tac-Toe Game")
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
+        drop = OptionMenu(root, clicked, "Single player", "Single player impossible bot", "Multiplayer", "Tic tac toe square")
+        drop.pack()
         self._create_board_grid()
+        
 
     def _create_board_grid(self):
         for row in range(3):
