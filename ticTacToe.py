@@ -8,6 +8,18 @@ from PIL import ImageTk, Image
 
 def main():
     """Create the game's board and run its main loop."""
+    #Button
+    b = [
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]]
+    
+    #text for buttons
+    states = [
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]]
+
     board = TicTacToeBoard()
     board.mainloop()
 
