@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import font
-from menu import *
+#from menu import *
 
 class TicTacToeBoard(tk.Tk):
     def __init__(self):
