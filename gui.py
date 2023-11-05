@@ -1,14 +1,14 @@
 import tkinter as tk
 from tkinter import font
 from menu import *
+from PIL import ImageTk, Image
 
 class TicTacToeBoard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Tic-Tac-Toe Game")
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
-        drop = OptionMenu(root, clicked, "Single player", "Single player impossible bot", "Multiplayer", "Tic tac toe square")
-        drop.pack()
+        
         self._create_board_grid()
         
 
