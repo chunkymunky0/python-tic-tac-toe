@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import font
-from menu import *
+#from menu import *
 from PIL import ImageTk, Image
 
 class TicTacToeBoard(tk.Tk):
@@ -8,7 +8,6 @@ class TicTacToeBoard(tk.Tk):
         super().__init__()
         self.title("Tic-Tac-Toe Game")
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
-        
         self._create_board_grid()
         
 
