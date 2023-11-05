@@ -1,4 +1,7 @@
-
+from gui import *
+#from impossibleBot import *
+from normalBot import *
+from ticTacToe import *
 
     # check_if_tie()
     # if check_if_win() == False:

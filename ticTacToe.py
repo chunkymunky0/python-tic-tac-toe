@@ -8,6 +8,9 @@ from PIL import ImageTk, Image
 
 def main():
     """Create the game's board and run its main loop."""
+    Player1 = 'X'
+    stop_game = False
+
     #Button
     b = [
         [0,0,0],
