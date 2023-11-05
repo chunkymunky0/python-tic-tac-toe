@@ -4,6 +4,8 @@ from normalBot import *
 #from menu import *
 from normalGame import *
 from PIL import ImageTk, Image
+from tkinter import *
+
 
 
     # check_if_tie()
@@ -12,7 +14,11 @@ from PIL import ImageTk, Image
     #     return tie
 def check_if_win():
     global stop_game
-    # count = 0
+    states = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ]
  
     for i in range(3):
         if states[i][0] == states[i][1] == states[i][2] !=0:
