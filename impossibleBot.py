@@ -3,7 +3,7 @@ from ticTacToe import *
 import math
 
 def spaceAvailable(r, c):
-    if [position] == '0':
+    if states[r][c] == '0':
         return True 
     return False 
 
