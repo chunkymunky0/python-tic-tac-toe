@@ -1,7 +1,5 @@
 import tkinter as tk
 from tkinter import font
-#from menu import *
-from PIL import ImageTk, Image
 
 class TicTacToeBoard(tk.Tk):
     def __init__(self):
@@ -9,7 +7,6 @@ class TicTacToeBoard(tk.Tk):
         self.title("Tic-Tac-Toe Game")
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
         self._create_board_grid()
-        
 
     def _create_board_grid(self):
         for row in range(3):
@@ -37,5 +34,11 @@ class TicTacToeBoard(tk.Tk):
                 # Bind a callback function (click_button) to the button click event
                 button.bind("<Button-1>", self.click_button)
 
-    def click_button():
-        pass
+    def click_button(self, event):
+        button = event.widget
+        if button.cget("text") == "":
+            button.config(text="X")
+
+if __name__ == "__main__":
+    app = TicTacToeBoard()
+    app.mainloop()
