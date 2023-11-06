@@ -6,6 +6,10 @@ from normalGame import *
 from PIL import ImageTk, Image
 from tkinter import *
 
+numPlayers = 1
+player = 'p1'
+stop_game = False
+
 
 
     # check_if_tie()
@@ -64,9 +68,6 @@ def getPlayer():
 
 def main():
     """Create the game's board and run its main loop."""
-    numPlayers = 1
-    player = 'p1'
-    stop_game = False
 
     #Button
     b = [
