@@ -6,6 +6,10 @@ from normalGame import *
 from PIL import ImageTk, Image
 from tkinter import *
 
+numPlayers = 1
+player = 'p1'
+stop_game = False
+
 
 
     # check_if_tie()
@@ -52,11 +56,18 @@ def check_if_win():
  
             #winner = messagebox.showinfo("tie", "Tie")
 
+def switchPlayer():
+    if numPlayers == 1:
+        if player == 'p1':
+            player = 'comp'
+        elif player == 'comp':
+            player = 'p1'
+
+def getPlayer():
+    return player
+
 def main():
     """Create the game's board and run its main loop."""
-    Player1 = 'X'
-    cpu = 'O'
-    stop_game = False
 
     #Button
     b = [
@@ -70,6 +81,7 @@ def main():
         [0,0,0],
         [0,0,0]]
 
+    getPlayer()
     check_if_win()
     board = TicTacToeBoard()
     board.mainloop()
