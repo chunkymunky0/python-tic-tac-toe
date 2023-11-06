@@ -1,9 +1,9 @@
-from gui import *
+import gui
 from ticTacToe import *
 import math
 
 def spaceAvailable(r, c):
-    if states[r][c] == '0':
+    if getGameState[r][c] == '':
         return True 
     return False 
 
@@ -19,6 +19,7 @@ def make_best_move():
             bestMove = move
     ticTacBoard.make_move(bestMove)
 
+#def get_possible_moves():
 
 def impBotMove():
     bestScore = -800
