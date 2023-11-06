@@ -9,6 +9,7 @@ class TicTacToeBoard(tk.Tk):
         self.player_turn = 'X'  # Initialize the first player's turn as 'X'
         self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]  # Initialize the game state
         self._create_board_grid()
+        self._create_menu()  # Create the menu
 
     def _create_board_grid(self):
         for row in range(3):
@@ -56,11 +57,34 @@ class TicTacToeBoard(tk.Tk):
     def display_message(self, message):
         messagebox.showinfo("Game Over", message)
 
+    def reset_board(self):
+        # Reset the game board and state
+        self.player_turn = 'X'
+        self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]
+        for child in self.winfo_children():
+            if isinstance(child, tk.Frame):
+                for button in child.winfo_children():
+                    button.config(text="")
+        self.destroy()
+        app = TicTacToeBoard()
+        app.mainloop()
+
+    def _create_menu(self):
+        menu_bar = tk.Menu(master=self)
+        self.config(menu=menu_bar)
+        file_menu = tk.Menu(master=menu_bar)
+        file_menu.add_command(
+            label="Play Again",
+            command=self.reset_board
+        )
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=quit)
+        menu_bar.add_cascade(label="File", menu=file_menu)
+
     def click_button(self, event, row, col):
-        button = event.widget  # Get the button that was clicked
+        button = event.widget
         if button.cget("text") == "" and not self.check_for_win('X') and not self.check_for_win('O') and not self.check_for_tie():
-            button.config(text=self.player_turn)  # Set the text to the current player's symbol ('X' or 'O')
-            # Update the game state
+            button.config(text=self.player_turn)
             self.game_state[row][col] = self.player_turn
 
             if self.check_for_win(self.player_turn):
@@ -68,7 +92,6 @@ class TicTacToeBoard(tk.Tk):
             elif self.check_for_tie():
                 self.display_message("It's a tie!")
 
-            # After a move, switch to the other player's turn
             self.player_turn = 'O' if self.player_turn == 'X' else 'X'
 
 if __name__ == "__main__":
