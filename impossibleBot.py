@@ -3,9 +3,10 @@ from ticTacToe import *
 import math
 
 def spaceAvailable(r, c):
-    if getGameState[r][c] == '':
+    if getGameState(r,c) == '':
         return True 
-    return False 
+    else:
+        return False 
 
 def make_best_move():
     bestScore = -math.inf
@@ -46,20 +47,20 @@ def minimax(board, isMaximizing):
     if isMaximizing:
         bestScore = -800
         for key in board.keys():
-            if board[key] == ' ':
+            if board[key] == '':
                 board[key] = computer 
                 score = minimax(board, False)
-                board[key] = ' '
+                board[key] = ''
                 if score > bestScore:
                     bestScore = score
         return bestScore 
     else:
         bestScore = 800 
         for key in board.keys():
-            if board[key] == ' ':
+            if board[key] == '':
                 board[key] = player 
                 score = minimax(board, True)
-                board[key] = ' '
+                board[key] = ''
                 if score < bestScore:
                     bestScore = score 
         return bestScore

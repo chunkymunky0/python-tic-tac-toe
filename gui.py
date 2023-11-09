@@ -37,6 +37,12 @@ class TicTacToeBoard(tk.Tk):
                 # Bind a callback function (click_button) to the button click event
                 button.bind("<Button-1>", lambda event, row=row, col=col: self.click_button(event, row, col))
 
+    def get_game_state(self, r, c):
+        return self.game_state[r][c]
+    
+    def set_game_state(self, r, c, value):
+        self.game_state[r][c] = value
+
     def check_for_win(self, player):
         for row in range(3):
             if all(self.game_state[row][col] == player for col in range(3)):
