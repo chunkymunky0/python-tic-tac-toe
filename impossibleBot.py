@@ -1,71 +1,109 @@
-import gui
+from gui import *
 from ticTacToe import *
 import math
 
+copiedBoard = [['', '', ''], ['', '', ''], ['', '', '']]
+spotsLeft = [['', '', ''], ['', '', ''], ['', '', '']]
+bestMoveR = ''
+bestMoveC = ''
+
+def copyBoard():
+    for r in copiedBoard:
+        for c in copiedBoard:
+            copiedBoard[r][c] = TicTacToeBoard.getGameState(r,c)
+
+
 def spaceAvailable(r, c):
-    if getGameState(r,c) == '':
+    if TicTacToeBoard.getGameState(r,c) == '':
         return True 
     else:
         return False 
-
-def make_best_move():
-    bestScore = -math.inf
-    bestMove = None
-    for move in ticTacBoard.get_possible_moves():
-        ticTacBoard.make_move(move)
-        score = minimax(False, aiPlayer, ticTacBoard)
-        ticTacBoard.undo()
-        if (score > bestScore):
-            bestScore = score
-            bestMove = move
-    ticTacBoard.make_move(bestMove)
-
-#def get_possible_moves():
+    
+def get_possible_moves():
+    copyBoard()
+    for r in spotsLeft:
+        for c in spotsLeft:
+            if copiedBoard[r][c] == '':
+                copiedBoard[r][c] = computer
+                score = minimax(copiedBoard, False)
+                copiedBoard[r][c] = ''
+                if score > bestScore:
+                    bestScore = score
+            else:
+                spotsLeft[r][c] = ''
 
 def impBotMove():
+    
     bestScore = -800
-    bestMove = 0
-    for key in board.keys():
-        if board[key] == ' ':
-            board[key] = computer
-            score = minimax(board, False)
-            board[key] = ' '
-            if score > bestScore:
-                bestScore = score 
-                bestMove = key
-    insertLetter(computer, bestMove)
+    r = 0
+    c = 0
+    for r in copiedBoard:
+        for c in copiedBoard:
+            if copiedBoard[r][c] == '':
+                copiedBoard[r][c] = computer
+                score = minimax(copiedBoard, False)
+                copiedBoard[r][c] = ''
+                if score > bestScore:
+                    bestScore = score 
+                    bestMoveR = r
+                    bestMoveC = c
+    TicTacToeBoard.set_game_state(bestMoveR, bestMoveC, computer)
     return 
 
-def minimax(board, isMaximizing):
-    if checkWhoWon(computer):
+def minimax(copiedBoard, isMaximizing):
+    if checkWhichMarkWon(computer):
         return 1 
-    elif checkWhoWon(player):
+    elif checkWhichMarkWon(p1):
         return -1 
     elif checkDraw():
         return 0
-        
+    
     if isMaximizing:
         bestScore = -800
-        for key in board.keys():
-            if board[key] == '':
-                board[key] = computer 
-                score = minimax(board, False)
-                board[key] = ''
-                if score > bestScore:
-                    bestScore = score
+        for r in copiedBoard:
+            for c in copiedBoard:
+                if copiedBoard[r][c] == '':
+                    copiedBoard[r][c] = computer 
+                    score = minimax(copiedBoard, False)
+                    copiedBoard[r][c] = ''
+                    if score > bestScore:
+                        bestScore = score
         return bestScore 
     else:
         bestScore = 800 
-        for key in board.keys():
-            if board[key] == '':
-                board[key] = player 
-                score = minimax(board, True)
-                board[key] = ''
-                if score < bestScore:
-                    bestScore = score 
+        for r in copiedBoard:
+            for c in copiedBoard:
+                if copiedBoard[r][c] == '':
+                    copiedBoard[r][c] = p1 
+                    score = minimax(copiedBoard, True)
+                    copiedBoard[r][c] = ''
+                    if score < bestScore:
+                        bestScore = score 
         return bestScore
-
-
-while not checkWin():
-    impBotMove()
-    playerMove()
+    
+def checkWhichMarkWon(mark):
+    if (copiedBoard[0][0] == copiedBoard[0][1] and copiedBoard[0][0] == copiedBoard[0][2] and copiedBoard[0][0] == mark):
+        return True
+    elif (copiedBoard[1][0] == copiedBoard[1][1] and copiedBoard[1][0] == copiedBoard[1][2] and copiedBoard[1][0] == mark):
+        return True
+    elif (copiedBoard[2][0] == copiedBoard[2][1] and copiedBoard[2][0] == copiedBoard[2][2] and copiedBoard[2][0] == mark):
+        return True
+    elif (copiedBoard[0][0] == copiedBoard[1][0] and copiedBoard[0][0] == copiedBoard[2][0] and copiedBoard[0][0] == mark):
+        return True
+    elif (copiedBoard[0][1] == copiedBoard[1][1] and copiedBoard[0][1] == copiedBoard[2][1] and copiedBoard[0][1] == mark):
+        return True
+    elif (copiedBoard[0][2] == copiedBoard[1][2] and copiedBoard[0][2] == copiedBoard[2][2] and copiedBoard[0][2] == mark):
+        return True
+    elif (copiedBoard[0][0] == copiedBoard[1][1] and copiedBoard[0][0] == copiedBoard[2][2] and copiedBoard[0][0] == mark):
+        return True
+    elif (copiedBoard[2][0] == copiedBoard[1][1] and copiedBoard[2][0] == copiedBoard[0][2] and copiedBoard[2][0] == mark):
+        return True
+    else:
+        return False
+    
+def checkDraw():
+    for r in copiedBoard:
+        for c in copiedBoard:
+            if copiedBoard[r][c] == '':
+                return False 
+        return True

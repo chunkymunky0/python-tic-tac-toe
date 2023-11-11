@@ -8,7 +8,12 @@ from tkinter import *
 
 numPlayers = 1
 player = 'p1'
+p1 = 'X'
+p2 = 'O'
 stop_game = False
+computer = 'O'
+
+
 
 
 

@@ -37,6 +37,9 @@ class TicTacToeBoard(tk.Tk):
                 # Bind a callback function (click_button) to the button click event
                 button.bind("<Button-1>", lambda event, row=row, col=col: self.click_button(event, row, col))
 
+    def set_title(self, newName):
+        self.title(newName)
+    
     def get_game_state(self, r, c):
         return self.game_state[r][c]
     
@@ -85,7 +88,48 @@ class TicTacToeBoard(tk.Tk):
         )
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=quit)
+
+        game_modes = tk.Menu(master=menu_bar)
+        one_player = tk.Menu(master=game_modes)
+        two_players = tk.Menu(master=game_modes)
+        normal_bot = tk.Menu(master=one_player)
+        game_modes.add_cascade(label="1 Player", menu=one_player)
+        game_modes.add_cascade(label="2 Players", menu=two_players)
+
+        two_players.add_command(
+            # Two Players (Normal Game)
+            TicTacToeBoard.set_title(self, "Normal Game - Two Players"),
+            label="Normal Game",
+            command=self.reset_board
+        )
+        two_players.add_command(
+            # Two Players (Game in a Game)
+            TicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
+            label="Game in a Game",
+            command=self.reset_board
+        )
+        one_player.add_cascade(label="Normal Bot", menu=normal_bot)
+        normal_bot.add_command(
+            # Single Player (Game in a Game - Normal Bot)
+            TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
+            label="Game in a Game",
+            command=self.reset_board
+        )
+        normal_bot.add_command(
+            # Single Player (Normal Game - Normal Bot)
+            TicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
+            label="Normal Game",
+            command=self.reset_board
+        )
+        one_player.add_command(
+            TicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
+            # Single Player (Impossible Bot)
+            label="Impossible Bot",
+            command=self.reset_board
+        )
+        
         menu_bar.add_cascade(label="File", menu=file_menu)
+        menu_bar.add_cascade(label="Game Modes", menu=game_modes)
 
     def click_button(self, event, row, col):
         button = event.widget
