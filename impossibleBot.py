@@ -3,7 +3,6 @@ from ticTacToe import *
 import math
 
 copiedBoard = [['', '', ''], ['', '', ''], ['', '', '']]
-spotsLeft = [['', '', ''], ['', '', ''], ['', '', '']]
 bestMoveR = ''
 bestMoveC = ''
 
@@ -21,8 +20,8 @@ def spaceAvailable(r, c):
     
 def get_possible_moves():
     copyBoard()
-    for r in spotsLeft:
-        for c in spotsLeft:
+    for r in copiedBoard:
+        for c in copiedBoard:
             if copiedBoard[r][c] == '':
                 copiedBoard[r][c] = computer
                 score = minimax(copiedBoard, False)
@@ -30,10 +29,10 @@ def get_possible_moves():
                 if score > bestScore:
                     bestScore = score
             else:
-                spotsLeft[r][c] = ''
+                copiedBoard[r][c] = ''
 
 def impBotMove():
-    
+
     bestScore = -800
     r = 0
     c = 0
