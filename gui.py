@@ -79,9 +79,9 @@ class TicTacToeBoard(tk.Tk):
         app.mainloop()
 
     def _create_menu(self):
-        menu_bar = tk.Menu(master=self)
+        menu_bar = tk.Menu(master=self, tearoff="off")
         self.config(menu=menu_bar)
-        file_menu = tk.Menu(master=menu_bar)
+        file_menu = tk.Menu(master=menu_bar, tearoff="off")
         file_menu.add_command(
             label="Play Again",
             command=self.reset_board
@@ -89,10 +89,10 @@ class TicTacToeBoard(tk.Tk):
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=quit)
 
-        game_modes = tk.Menu(master=menu_bar)
-        one_player = tk.Menu(master=game_modes)
-        two_players = tk.Menu(master=game_modes)
-        normal_bot = tk.Menu(master=one_player)
+        game_modes = tk.Menu(master=menu_bar, tearoff="off")
+        one_player = tk.Menu(master=game_modes, tearoff="off")
+        two_players = tk.Menu(master=game_modes, tearoff="off")
+        normal_bot = tk.Menu(master=one_player, tearoff="off")
         game_modes.add_cascade(label="1 Player", menu=one_player)
         game_modes.add_cascade(label="2 Players", menu=two_players)
 
@@ -110,15 +110,15 @@ class TicTacToeBoard(tk.Tk):
         )
         one_player.add_cascade(label="Normal Bot", menu=normal_bot)
         normal_bot.add_command(
-            # Single Player (Game in a Game - Normal Bot)
-            TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
-            label="Game in a Game",
-            command=self.reset_board
-        )
-        normal_bot.add_command(
             # Single Player (Normal Game - Normal Bot)
             TicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
             label="Normal Game",
+            command=self.reset_board
+        )
+        normal_bot.add_command(
+            # Single Player (Game in a Game - Normal Bot)
+            TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
+            label="Game in a Game",
             command=self.reset_board
         )
         one_player.add_command(
