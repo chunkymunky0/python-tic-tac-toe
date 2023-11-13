@@ -1,4 +1,4 @@
-from gui import *
+from normalgame import *
 from gameInGame import *
 from impossibleBot import *
 from normalBot import *

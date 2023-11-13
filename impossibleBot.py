@@ -1,4 +1,4 @@
-from gui import *
+from normalgame import *
 from ticTacToe import *
 import math
 
