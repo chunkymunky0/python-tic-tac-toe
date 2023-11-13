@@ -13,6 +13,7 @@ p1 = 'X'
 p2 = 'O'
 stop_game = False
 computer = 'O'
+gameMode = "norm"
 
 
 
@@ -79,8 +80,7 @@ def getPlayer():
 
 def main():
     """Create the game's board and run its main loop."""
-
-    #Button
+    """#Button
     b = [
         [0,0,0],
         [0,0,0],
@@ -90,13 +90,47 @@ def main():
     states = [
         [0,0,0],
         [0,0,0],
-        [0,0,0]]
+        [0,0,0]]"""
+
+    if gameMode == "norm":
+        #Button
+        b = [
+            [0,0,0],
+            [0,0,0],
+            [0,0,0]]
+        
+        #text for buttons
+        states = [
+            [0,0,0],
+            [0,0,0],
+            [0,0,0]]
+        
+    elif gameMode == "gng":
+        #Button
+        b = [
+            [[0,0,0], [0,0,0], [0,0,0]],
+            [[0,0,0], [0,0,0], [0,0,0]],
+            [[0,0,0], [0,0,0], [0,0,0]]]
+        
+        #text for buttons
+        states = [
+            [[0,0,0], [0,0,0], [0,0,0]],
+            [[0,0,0], [0,0,0], [0,0,0]],
+            [[0,0,0], [0,0,0], [0,0,0]]]
+
 
     getPlayer()
     norm_check_if_win()
-    #normal game starter
-    board = TicTacToeBoard()
-    
+
+    if gameMode == "norm":
+        #normal game starter
+        board = TicTacToeBoard()
+        board.mainloop()
+    elif gameMode == "gng":
+        #game in game starter
+        board = BigTicTacToeBoard()
+        board.mainloop()
+
     #game in game starter
     #board = BigTicTacToeBoard()
     board.mainloop()
