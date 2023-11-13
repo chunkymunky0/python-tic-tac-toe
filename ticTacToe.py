@@ -1,5 +1,5 @@
 from gui import *
-#from impossibleBot import *
+from impossibleBot import *
 from normalBot import *
 #from menu import *
 from normalGame import *
@@ -63,10 +63,15 @@ def check_if_win():
 
 def switchPlayer():
     if numPlayers == 1:
-        if player == 'p1':
-            player = 'comp'
-        elif player == 'comp':
-            player = 'p1'
+        if player == p1:
+            player = computer
+        elif player == computer:
+            player = p1
+    else:
+        if player == p1:
+            player = p2
+        elif player == computer:
+            player = p2
 
 def getPlayer():
     return player
