@@ -1,36 +1,62 @@
 import tkinter as tk
 from tkinter import font, messagebox
 
-class TicTacToeBoard(tk.Tk):
+class BigTicTacToeBoard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Tic-Tac-Toe Game")
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
         self.player_turn = 'X'  # Initialize the first player's turn as 'X'
-        self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]  # Initialize the game state
+        self.game_state = [[['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']],
+                           [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']],
+                           [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']]]  # Initialize the game state
         self._create_board_grid()
         self._create_menu()  # Create the menu
 
     def _create_board_grid(self):
-        for row in range(3):
-            self.rowconfigure(row, weight=1, minsize=150)
-            for col in range(3):
-                self.columnconfigure(col, weight=1, minsize=150)
+        color = "#ECF0F1"
+        for row in range(9):
+            self.rowconfigure(row, weight=1, minsize=75)
+            for col in range(9):
+                self.columnconfigure(col, weight=1, minsize=75)
+
+                
+                if row < 3:
+                    if col < 3:
+                        color = "#B1B4B5"
+                    elif col < 6:
+                        color = "#ECF0F1"
+                    elif col < 9:
+                        color = "#B1B4B5"
+                elif row < 6:
+                    if col < 3:
+                        color = "#ECF0F1"
+                    elif col < 6:
+                        color = "#B1B4B5"
+                    elif col < 9:
+                        color = "#ECF0F1"
+                elif row < 9:
+                    if col < 3:
+                        color = "#B1B4B5"
+                    elif col < 6:
+                        color = "#ECF0F1"
+                    elif col < 9:
+                        color = "#B1B4B5"
 
                 frame = tk.Frame(
                     master=self,
                     relief=tk.RAISED,
                     borderwidth=1,
-                    bg="#ecf0f1"  # Set the background color of the squares to a light gray
+                    bg= color  # Set the background color of the squares to a light gray
                 )
                 frame.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
 
                 button = tk.Button(
                     master=frame,
                     text="",
-                    font=font.Font(size=36, weight="bold"),
+                    font=font.Font(size=13, weight="bold"),
                     fg="#2c3e50",  # Set the text color to a dark gray
-                    bg="#ecf0f1"  # Set the background color of the buttons to match the squares
+                    bg= color  # Set the background color of the buttons to match the squares
                 )
                 button.pack(fill=tk.BOTH, expand=True)
 
@@ -69,13 +95,15 @@ class TicTacToeBoard(tk.Tk):
     def reset_board(self):
         # Reset the game board and state
         self.player_turn = 'X'
-        self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]
+        self.game_state = [[['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']],
+                           [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']],
+                           [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']]]
         for child in self.winfo_children():
             if isinstance(child, tk.Frame):
                 for button in child.winfo_children():
                     button.config(text="")
         self.destroy()
-        app = TicTacToeBoard()
+        app = BigTicTacToeBoard()
         app.mainloop()
 
     def _create_menu(self):
@@ -98,31 +126,31 @@ class TicTacToeBoard(tk.Tk):
 
         two_players.add_command(
             # Two Players (Normal Game)
-            TicTacToeBoard.set_title(self, "Normal Game - Two Players"),
+            BigTicTacToeBoard.set_title(self, "Normal Game - Two Players"),
             label="Normal Game",
             command=self.reset_board
         )
         two_players.add_command(
             # Two Players (Game in a Game)
-            TicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
+            BigTicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
             label="Game in a Game",
             command=self.reset_board
         )
         one_player.add_cascade(label="Normal Bot", menu=normal_bot)
         normal_bot.add_command(
             # Single Player (Normal Game - Normal Bot)
-            TicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
+            BigTicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
             label="Normal Game",
             command=self.reset_board
         )
         normal_bot.add_command(
             # Single Player (Game in a Game - Normal Bot)
-            TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
+            BigTicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
             label="Game in a Game",
             command=self.reset_board
         )
         one_player.add_command(
-            TicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
+            BigTicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
             # Single Player (Impossible Bot)
             label="Impossible Bot",
             command=self.reset_board
@@ -145,5 +173,5 @@ class TicTacToeBoard(tk.Tk):
             self.player_turn = 'O' if self.player_turn == 'X' else 'X'
 
 if __name__ == "__main__":
-    app = TicTacToeBoard()
+    app = BigTicTacToeBoard()
     app.mainloop()

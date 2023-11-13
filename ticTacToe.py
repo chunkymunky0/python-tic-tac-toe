@@ -1,4 +1,5 @@
 from gui import *
+from gameInGame import *
 from impossibleBot import *
 from normalBot import *
 #from menu import *
@@ -93,7 +94,7 @@ def main():
 
     getPlayer()
     check_if_win()
-    board = TicTacToeBoard()
+    board = BigTicTacToeBoard()
     board.mainloop()
 
 if __name__ == "__main__":
