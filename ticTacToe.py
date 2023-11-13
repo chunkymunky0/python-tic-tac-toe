@@ -19,10 +19,10 @@ computer = 'O'
 
 
     # check_if_tie()
-    # if check_if_win() == False:
+    # if norm_check_if_win() == False:
     #     tie = messagebox.showinfo("tie","its tie")
     #     return tie
-def check_if_win():
+def norm_check_if_win():
     global stop_game
     states = [
         [0, 0, 0],
@@ -93,7 +93,7 @@ def main():
         [0,0,0]]
 
     getPlayer()
-    check_if_win()
+    norm_check_if_win()
     #normal game starter
     board = TicTacToeBoard()
     

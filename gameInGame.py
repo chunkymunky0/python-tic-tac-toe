@@ -20,7 +20,7 @@ class BigTicTacToeBoard(tk.Tk):
             for col in range(9):
                 self.columnconfigure(col, weight=1, minsize=75)
 
-                
+                # adds different colors to different squares
                 if row < 3:
                     if col < 3:
                         color = "#B1B4B5"

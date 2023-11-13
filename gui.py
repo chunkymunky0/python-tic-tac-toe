@@ -12,16 +12,40 @@ class TicTacToeBoard(tk.Tk):
         self._create_menu()  # Create the menu
 
     def _create_board_grid(self):
+        color = "#ECF0F1"
         for row in range(3):
             self.rowconfigure(row, weight=1, minsize=150)
             for col in range(3):
                 self.columnconfigure(col, weight=1, minsize=150)
 
+                # adds different colors to different squares
+                if row < 1:
+                    if col < 1:
+                        color = "#B1B4B5"
+                    elif col < 2:
+                        color = "#ECF0F1"
+                    else:
+                        color = "#B1B4B5"
+                elif row < 2:
+                    if col < 1:
+                        color = "#ECF0F1"
+                    elif col < 2:
+                        color = "#B1B4B5"
+                    else:
+                        color = "#ECF0F1"
+                else:
+                    if col < 1:
+                        color = "#B1B4B5"
+                    elif col < 2:
+                        color = "#ECF0F1"
+                    else:
+                        color = "#B1B4B5"
+
                 frame = tk.Frame(
                     master=self,
                     relief=tk.RAISED,
                     borderwidth=1,
-                    bg="#ecf0f1"  # Set the background color of the squares to a light gray
+                    bg= color  # Set the background color of the squares to a light gray
                 )
                 frame.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
 
@@ -30,7 +54,7 @@ class TicTacToeBoard(tk.Tk):
                     text="",
                     font=font.Font(size=36, weight="bold"),
                     fg="#2c3e50",  # Set the text color to a dark gray
-                    bg="#ecf0f1"  # Set the background color of the buttons to match the squares
+                    bg=color  # Set the background color of the buttons to match the squares
                 )
                 button.pack(fill=tk.BOTH, expand=True)
 
