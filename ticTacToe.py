@@ -94,7 +94,11 @@ def main():
 
     getPlayer()
     check_if_win()
-    board = BigTicTacToeBoard()
+    #normal game starter
+    board = TicTacToeBoard()
+    
+    #game in game starter
+    #board = BigTicTacToeBoard()
     board.mainloop()
 
 if __name__ == "__main__":
