@@ -1,6 +1,6 @@
 from gameInGame import *
 from impossibleBot import *
-from normalBot import *
+#from normalBot import *
 #from menu import *
 from normalGame import *
 from PIL import ImageTk, Image
