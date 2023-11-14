@@ -5,7 +5,7 @@ class TicTacToeBoard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Tic-Tac-Toe Game")
-        self.geometry("500x500")
+        self.geometry("750x750")
         self.resizable(0,0)
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
         self.player_turn = 'X'  # Initialize the first player's turn as 'X'
