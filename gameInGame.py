@@ -65,6 +65,7 @@ class BigTicTacToeBoard(tk.Tk):
 
     def set_title(self, newName):
         self.title(newName)
+        
     
     def get_game_state(self, r, c):
         return self.game_state[r][c]

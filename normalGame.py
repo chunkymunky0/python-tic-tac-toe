@@ -1,10 +1,13 @@
 import tkinter as tk
 from tkinter import font, messagebox
+from readingcsvMenu import *
 
 class TicTacToeBoard(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Tic-Tac-Toe Game")
+        
+        title = get_value()
+        self.title(title)
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
         self.player_turn = 'X'  # Initialize the first player's turn as 'X'
         self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]  # Initialize the game state
@@ -122,31 +125,31 @@ class TicTacToeBoard(tk.Tk):
 
         two_players.add_command(
             # Two Players (Normal Game)
-            TicTacToeBoard.set_title(self, "Normal Game - Two Players"),
+            set_value("Normal Game - Two Players"),
             label="Normal Game",
             command=self.reset_board
         )
         two_players.add_command(
             # Two Players (Game in a Game)
-            TicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
+           set_value("Game in a Game - Two Players"),
             label="Game in a Game",
             command=self.reset_board
         )
         one_player.add_cascade(label="Normal Bot", menu=normal_bot)
         normal_bot.add_command(
             # Single Player (Normal Game - Normal Bot)
-            TicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
+            set_value("Normal Game - Normal Bot"),
             label="Normal Game",
             command=self.reset_board
         )
         normal_bot.add_command(
             # Single Player (Game in a Game - Normal Bot)
-            TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
+            set_value("Game in a Game - Normal Bot"),
             label="Game in a Game",
             command=self.reset_board
         )
         one_player.add_command(
-            TicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
+            set_value("Normal Game - Impossible Bot"),
             # Single Player (Impossible Bot)
             label="Impossible Bot",
             command=self.reset_board

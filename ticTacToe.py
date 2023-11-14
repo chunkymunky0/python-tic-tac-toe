@@ -1,10 +1,10 @@
 from gameInGame import *
 from impossibleBot import *
-from normalBot import *
 #from menu import *
 from normalGame import *
 from PIL import ImageTk, Image
 from tkinter import *
+from readingcsvMenu import *
 
 numPlayers = 1
 player = 'p1'
@@ -12,7 +12,7 @@ p1 = 'X'
 p2 = 'O'
 stop_game = False
 computer = 'O'
-gameMode = "norm"
+gameMode = get_value()
 
 
 
