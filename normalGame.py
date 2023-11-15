@@ -10,7 +10,7 @@ class TicTacToeBoard(tk.Tk):
         self.title("Tic-Tac-Toe Game")
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
         self.player_turn = 'X'  # Initialize the first player's turn as 'X'
-        self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]  # Initialize the game state
+        self.normal_game_state = [['', '', ''], ['', '', ''], ['', '', '']]  # Initialize the game state
         self._create_board_grid()
         self._create_menu()  # Create the menu
 
@@ -68,27 +68,27 @@ class TicTacToeBoard(tk.Tk):
         self.title(newName)
     
     def get_game_state(self, r, c):
-        return self.game_state[r][c]
+        return self.normal_game_state[r][c]
     
     def set_game_state(self, r, c, value):
-        self.game_state[r][c] = value
+        self.normal_game_state[r][c] = value
 
     def check_for_win(self, player):
         for row in range(3):
-            if all(self.game_state[row][col] == player for col in range(3)):
+            if all(self.normal_game_state[row][col] == player for col in range(3)):
                 return True
 
         for col in range(3):
-            if all(self.game_state[row][col] == player for row in range(3)):
+            if all(self.normal_game_state[row][col] == player for row in range(3)):
                 return True
 
-        if all(self.game_state[i][i] == player for i in range(3)) or all(self.game_state[i][2 - i] == player for i in range(3)):
+        if all(self.normal_game_state[i][i] == player for i in range(3)) or all(self.normal_game_state[i][2 - i] == player for i in range(3)):
             return True
 
         return False
 
     def check_for_tie(self):
-        return all(self.game_state[row][col] != '' for row in range(3) for col in range(3))
+        return all(self.normal_game_state[row][col] != '' for row in range(3) for col in range(3))
 
     def display_message(self, message):
         messagebox.showinfo("Game Over", message)
@@ -96,7 +96,7 @@ class TicTacToeBoard(tk.Tk):
     def reset_board(self):
         # Reset the game board and state
         self.player_turn = 'X'
-        self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]
+        self.normal_game_state = [['', '', ''], ['', '', ''], ['', '', '']]
         for child in self.winfo_children():
             if isinstance(child, tk.Frame):
                 for button in child.winfo_children():
@@ -128,6 +128,7 @@ class TicTacToeBoard(tk.Tk):
             TicTacToeBoard.set_title(self, "Normal Game - Two Players"),
             label="Normal Game",
             command=self.reset_board
+            #command=lambda: controller.show_frame(normal_game_page)
         )
         two_players.add_command(
             # Two Players (Game in a Game)
@@ -162,7 +163,7 @@ class TicTacToeBoard(tk.Tk):
         button = event.widget
         if button.cget("text") == "" and not self.check_for_win('X') and not self.check_for_win('O') and not self.check_for_tie():
             button.config(text=self.player_turn)
-            self.game_state[row][col] = self.player_turn
+            self.normal_game_state[row][col] = self.player_turn
 
             if self.check_for_win(self.player_turn):
                 self.display_message(f"{self.player_turn} wins!")
