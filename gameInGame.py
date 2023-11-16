@@ -1,10 +1,11 @@
 import tkinter as tk
 from tkinter import font, messagebox
+from normalGame import *
 
 class BigTicTacToeBoard(tk.Tk):
-    def __init__(self):
+    def __init__(self, titleName = "Tic-Tac-Toe Game"):
         super().__init__()
-        self.title("Tic-Tac-Toe Game")
+        self.title(titleName)
         self.geometry("750x750")
         self.resizable(0,0)
         self.configure(bg="#3498db")  # Set the background color to a shade of blue
@@ -13,6 +14,9 @@ class BigTicTacToeBoard(tk.Tk):
                            [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']],
                            [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']]]  # Initialize the game state
         self._create_board_grid()
+        """
+        still needs code to use the opponent parameter
+        """
         self._create_menu()  # Create the menu
 
     def _create_board_grid(self):
@@ -67,6 +71,7 @@ class BigTicTacToeBoard(tk.Tk):
 
     def set_title(self, newName):
         self.title(newName)
+        self.reset_board(newName)
     
     def get_game_state(self, r, c):
         return self.game_state[r][c]
@@ -94,7 +99,7 @@ class BigTicTacToeBoard(tk.Tk):
     def display_message(self, message):
         messagebox.showinfo("Game Over", message)
 
-    def reset_board(self):
+    def reset_board(self, titleName = ""):
         # Reset the game board and state
         self.player_turn = 'X'
         self.game_state = [[['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']], [['', '', ''], ['', '', ''], ['', '', '']],
@@ -105,7 +110,12 @@ class BigTicTacToeBoard(tk.Tk):
                 for button in child.winfo_children():
                     button.config(text="")
         self.destroy()
-        app = BigTicTacToeBoard()
+        if titleName.startswith("Normal Game"):
+            app = TicTacToeBoard(titleName)
+        elif titleName.startswith("Game in a Game"):
+            app = BigTicTacToeBoard(titleName)
+        else:
+            app = BigTicTacToeBoard()
         app.mainloop()
 
     def _create_menu(self):
