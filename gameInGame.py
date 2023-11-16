@@ -128,34 +128,39 @@ class BigTicTacToeBoard(tk.Tk):
 
         two_players.add_command(
             # Two Players (Normal Game)
-            BigTicTacToeBoard.set_title(self, "Normal Game - Two Players"),
+            #TicTacToeBoard.set_title(self, "Normal Game - Two Players"),
             label="Normal Game",
-            command=self.reset_board
+            #command=self.reset_board
+            command = lambda: BigTicTacToeBoard.set_title(self, "Normal Game - Two Players")
         )
         two_players.add_command(
             # Two Players (Game in a Game)
-            BigTicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
+            #TicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
             label="Game in a Game",
-            command=self.reset_board
+            #command=self.reset_board
+            command = lambda: BigTicTacToeBoard.set_title(self, "Game in a Game - Two Players")
         )
         one_player.add_cascade(label="Normal Bot", menu=normal_bot)
         normal_bot.add_command(
             # Single Player (Normal Game - Normal Bot)
-            BigTicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
+            #TicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
             label="Normal Game",
-            command=self.reset_board
+            #command=self.reset_board
+            command = lambda: BigTicTacToeBoard.set_title(self, "Normal Game - Normal Bot")
         )
         normal_bot.add_command(
             # Single Player (Game in a Game - Normal Bot)
-            BigTicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
+            #TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
             label="Game in a Game",
-            command=self.reset_board
+            #command=self.reset_board
+            command = lambda: BigTicTacToeBoard.set_title(self, "Game in a Game - Normal Bot")
         )
         one_player.add_command(
-            BigTicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
+            #TicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
             # Single Player (Impossible Bot)
             label="Impossible Bot",
-            command=self.reset_board
+            #command=self.reset_board
+            command = lambda: BigTicTacToeBoard.set_title(self, "Normal Game - Impossible Bot")
         )
         
         menu_bar.add_cascade(label="File", menu=file_menu)
