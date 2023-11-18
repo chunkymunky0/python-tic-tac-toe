@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import font, messagebox
-from gameInGame import BigTicTacToeBoard as gng
+#from gameInGame import BigGame as gng
 
 namedTitle = ""
 
-class TicTacToeBoard(tk.Tk):
+class Game(tk.Tk):
     
     __namedTitle = ""
 
@@ -117,13 +117,13 @@ class TicTacToeBoard(tk.Tk):
                     button.config(text="")
         self.destroy()
         if titleName.startswith("Normal Game"):
-            app = TicTacToeBoard(titleName)
+            app = Game(titleName)
         elif titleName.startswith("Game in a Game"):
             app = gng(titleName)
         else:
             titleName = self.get_title()
             print("New Title: " + titleName)
-            app = TicTacToeBoard(titleName)
+            app = Game(titleName)
         app.mainloop()
 
     def _create_menu(self):
@@ -146,39 +146,39 @@ class TicTacToeBoard(tk.Tk):
 
         two_players.add_command(
             # Two Players (Normal Game)
-            #TicTacToeBoard.set_title(self, "Normal Game - Two Players"),
+            #Game.set_title(self, "Normal Game - Two Players"),
             label="Normal Game",
             #command=self.reset_board
-            command = lambda: TicTacToeBoard.set_title(self, "Normal Game - Two Players")
+            command = lambda: Game.set_title(self, "Normal Game - Two Players")
         )
         two_players.add_command(
             # Two Players (Game in a Game)
-            #TicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
+            #Game.set_title(self, "Game in a Game - Two Players"),
             label="Game in a Game",
             #command=self.reset_board
-            command = lambda: TicTacToeBoard.set_title(self, "Game in a Game - Two Players")
+            command = lambda: Game.set_title(self, "Game in a Game - Two Players")
         )
         one_player.add_cascade(label="Normal Bot", menu=normal_bot)
         normal_bot.add_command(
             # Single Player (Normal Game - Normal Bot)
-            #TicTacToeBoard.set_title(self, "Normal Game - Normal Bot"),
+            #Game.set_title(self, "Normal Game - Normal Bot"),
             label="Normal Game",
             #command=self.reset_board
-            command = lambda: TicTacToeBoard.set_title(self, "Normal Game - Normal Bot")
+            command = lambda: Game.set_title(self, "Normal Game - Normal Bot")
         )
         normal_bot.add_command(
             # Single Player (Game in a Game - Normal Bot)
-            #TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
+            #Game.set_title(self, "Game in a Game - Normal Bot"),
             label="Game in a Game",
             #command=self.reset_board
-            command = lambda: TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot")
+            command = lambda: Game.set_title(self, "Game in a Game - Normal Bot")
         )
         one_player.add_command(
-            #TicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
+            #Game.set_title(self, "Normal Game - Impossible Bot"),
             # Single Player (Impossible Bot)
             label="Impossible Bot",
             #command=self.reset_board
-            command = lambda: TicTacToeBoard.set_title(self, "Normal Game - Impossible Bot")
+            command = lambda: Game.set_title(self, "Normal Game - Impossible Bot")
         )
         
         menu_bar.add_cascade(label="File", menu=file_menu)
@@ -198,5 +198,5 @@ class TicTacToeBoard(tk.Tk):
             self.player_turn = 'O' if self.player_turn == 'X' else 'X'
 
 if __name__ == "__main__":
-    app = TicTacToeBoard()
+    app = Game()
     app.mainloop()
