@@ -189,6 +189,6 @@ class BigTicTacToeBoard(tk.Tk):
 
             self.player_turn = 'O' if self.player_turn == 'X' else 'X'
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     app = BigTicTacToeBoard()
-    app.mainloop()
+    app.mainloop()"""
