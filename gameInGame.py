@@ -59,7 +59,7 @@ class BigTicTacToeBoard(tk.Tk):
 
                 button = tk.Button(
                     master=frame,
-                    text="",
+                    text= None,
                     font=font.Font(size=13, weight="bold"),
                     fg="#2c3e50",  # Set the text color to a dark gray
                     bg= color  # Set the background color of the buttons to match the squares
@@ -177,17 +177,33 @@ class BigTicTacToeBoard(tk.Tk):
         menu_bar.add_cascade(label="Game Modes", menu=game_modes)
 
     def click_button(self, event, row, col):
+        print(f"Clicked on row {row}, column {col}")
+        
         button = event.widget
-        if button.cget("text") == "" and not self.check_for_win('X') and not self.check_for_win('O') and not self.check_for_tie():
-            button.config(text=self.player_turn)
-            self.game_state[row][col] = self.player_turn
+        if button.cget("text") == "":
+            if not self.check_for_win('X') and not self.check_for_win('O') and not self.check_for_tie():
+                button.config(text=self.player_turn)
+                self.game_state[row][col] = self.player_turn
 
-            if self.check_for_win(self.player_turn):
-                self.display_message(f"{self.player_turn} wins!")
-            elif self.check_for_tie():
-                self.display_message("It's a tie!")
+                
 
-            self.player_turn = 'O' if self.player_turn == 'X' else 'X'
+                if self.check_for_win(self.player_turn):
+                    print(f"{self.player_turn} wins!")
+                    self.display_message(f"{self.player_turn} wins!")
+                elif self.check_for_tie():
+                    print("It's a tie")
+                    self.display_message("It's a tie!")
+
+                self.player_turn = 'O' if self.player_turn == 'X' else 'X'
+            else:
+                print("game already over")
+        else:
+            print("invalid move: Button already has text")
+
+        print("current game stat:")    
+        for r in self.game_state:
+            print(r)
+        print()
 
 if __name__ == "__main__":
     app = BigTicTacToeBoard()
