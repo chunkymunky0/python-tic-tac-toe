@@ -27,7 +27,7 @@ bestMoveC = ''
 class TicTacToeBoard(tk.Tk):
     def __init__(self, titleName = "Tic-Tac-Toe Game"):
         super().__init__()
-        namedTitle = titleName
+        #namedTitle = titleName
         self.title(titleName)
         self.geometry("750x750")
         self.resizable(0,0)
@@ -219,167 +219,167 @@ class TicTacToeBoard(tk.Tk):
 # impossible Bot Stuff
 
 
-
-def copyBoard():
-    for r in copiedBoard:
-        for c in copiedBoard:
-            copiedBoard[r][c] = TicTacToeBoard.getGameState(r,c)
-
-
-def spaceAvailable(r, c):
-    if TicTacToeBoard.getGameState(r,c) == '':
-        return True 
-    else:
-        return False 
-    
-def get_possible_moves():
-    copyBoard()
-    for r in copiedBoard:
-        for c in copiedBoard:
-            if copiedBoard[r][c] == '':
-                copiedBoard[r][c] = computer
-                score = minimax(copiedBoard, False)
-                copiedBoard[r][c] = ''
-                if score > bestScore:
-                    bestScore = score
-            else:
-                copiedBoard[r][c] = ''
-
-def impBotMove():
-
-    bestScore = -800
-    r = 0
-    c = 0
-    for r in copiedBoard:
-        for c in copiedBoard:
-            if copiedBoard[r][c] == '':
-                copiedBoard[r][c] = computer
-                score = minimax(copiedBoard, False)
-                copiedBoard[r][c] = ''
-                if score > bestScore:
-                    bestScore = score 
-                    bestMoveR = r
-                    bestMoveC = c
-    TicTacToeBoard.set_game_state(bestMoveR, bestMoveC, computer)
-    return 
-
-def minimax(copiedBoard, isMaximizing):
-    if checkWhichMarkWon(computer):
-        return 1 
-    elif checkWhichMarkWon(p1):
-        return -1 
-    elif checkDraw():
-        return 0
-    
-    if isMaximizing:
-        bestScore = -800
-        for r in copiedBoard:
-            for c in copiedBoard:
-                if copiedBoard[r][c] == '':
-                    copiedBoard[r][c] = computer 
-                    score = minimax(copiedBoard, False)
-                    copiedBoard[r][c] = ''
-                    if score > bestScore:
-                        bestScore = score
-        return bestScore 
-    else:
-        bestScore = 800 
-        for r in copiedBoard:
-            for c in copiedBoard:
-                if copiedBoard[r][c] == '':
-                    copiedBoard[r][c] = p1 
-                    score = minimax(copiedBoard, True)
-                    copiedBoard[r][c] = ''
-                    if score < bestScore:
-                        bestScore = score 
-        return bestScore
-    
-def checkWhichMarkWon(mark):
-    if (copiedBoard[0][0] == copiedBoard[0][1] and copiedBoard[0][0] == copiedBoard[0][2] and copiedBoard[0][0] == mark):
-        return True
-    elif (copiedBoard[1][0] == copiedBoard[1][1] and copiedBoard[1][0] == copiedBoard[1][2] and copiedBoard[1][0] == mark):
-        return True
-    elif (copiedBoard[2][0] == copiedBoard[2][1] and copiedBoard[2][0] == copiedBoard[2][2] and copiedBoard[2][0] == mark):
-        return True
-    elif (copiedBoard[0][0] == copiedBoard[1][0] and copiedBoard[0][0] == copiedBoard[2][0] and copiedBoard[0][0] == mark):
-        return True
-    elif (copiedBoard[0][1] == copiedBoard[1][1] and copiedBoard[0][1] == copiedBoard[2][1] and copiedBoard[0][1] == mark):
-        return True
-    elif (copiedBoard[0][2] == copiedBoard[1][2] and copiedBoard[0][2] == copiedBoard[2][2] and copiedBoard[0][2] == mark):
-        return True
-    elif (copiedBoard[0][0] == copiedBoard[1][1] and copiedBoard[0][0] == copiedBoard[2][2] and copiedBoard[0][0] == mark):
-        return True
-    elif (copiedBoard[2][0] == copiedBoard[1][1] and copiedBoard[2][0] == copiedBoard[0][2] and copiedBoard[2][0] == mark):
-        return True
-    else:
-        return False
-    
-def checkDraw():
-    for r in copiedBoard:
-        for c in copiedBoard:
-            if copiedBoard[r][c] == '':
-                return False 
-        return True
+class impBot():
+	def copyBoard():
+		for r in copiedBoard:
+			for c in copiedBoard:
+				copiedBoard[r][c] = TicTacToeBoard.getGameState(r,c)
 
 
-    # check_if_tie()
-    # if norm_check_if_win() == False:
-    #     tie = messagebox.showinfo("tie","its tie")
-    #     return tie
-def norm_check_if_win():
-    global stop_game
-    states = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ]
- 
-    for i in range(3):
-        if states[i][0] == states[i][1] == states[i][2] !=0:
-            stop_game = True
- 
-            #winner = messagebox.showinfo("Winner", states[i][0] + " Won")
-            # disableAllButton()
-            break
- 
-    #for j in range(3):
-        elif states [0][i] == states[1][i] == states[2][i] != 0:
-            stop_game = True
- 
-            #winner = messagebox.showinfo("Winner", states[0][i]+ " Won!")
-            break
- 
-        elif states[0][0] == states[1][1] == states[2][2] !=0:
-            stop_game = True
- 
-            #winner = messagebox.showinfo("Winner", states[0][0]+ " Won!")
-            break
- 
-        elif states[0][2] == states[1][1] == states[2][0] !=0:
-            stop_game = True
- 
-            #winner = messagebox.showinfo("Winner" , states[0][2]+ " Won!")
-            break
- 
-        elif states[0][0] and states[0][1] and states[0][2] and states[1][0] and states[1][1] and states[1][2] and states[2][0] and states[2][1] and states[2][2] != 0:
-            stop_game = True
- 
-            #winner = messagebox.showinfo("tie", "Tie")
+	def spaceAvailable(r, c):
+		if TicTacToeBoard.getGameState(r,c) == '':
+			return True 
+		else:
+			return False 
+		
+	def get_possible_moves():
+		impBot.copyBoard()
+		for r in copiedBoard:
+			for c in copiedBoard:
+				if copiedBoard[r][c] == '':
+					copiedBoard[r][c] = computer
+					score = impBot.minimax(copiedBoard, False)
+					copiedBoard[r][c] = ''
+					if score > bestScore:
+						bestScore = score
+				else:
+					copiedBoard[r][c] = ''
 
-def switchPlayer():
-    if numPlayers == 1:
-        if getPlayer() == p1:
-            player = computer
-        elif getPlayer() == computer:
-            player = p1
-    else:
-        if player == p1:
-            player = p2
-        elif getPlayer() == computer:
-            player = p2
+	def impBotMove():
 
-def getPlayer():
-    return player
+		bestScore = -800
+		r = 0
+		c = 0
+		for r in copiedBoard:
+			for c in copiedBoard:
+				if copiedBoard[r][c] == '':
+					copiedBoard[r][c] = computer
+					score = impBot.minimax(copiedBoard, False)
+					copiedBoard[r][c] = ''
+					if score > bestScore:
+						bestScore = score 
+						bestMoveR = r
+						bestMoveC = c
+		TicTacToeBoard.set_game_state(bestMoveR, bestMoveC, computer)
+		return 
+
+	def minimax(copiedBoard, isMaximizing):
+		if impBot.checkWhichMarkWon(computer):
+			return 1 
+		elif impBot.checkWhichMarkWon(p1):
+			return -1 
+		elif impBot.checkDraw():
+			return 0
+		
+		if isMaximizing:
+			bestScore = -800
+			for r in copiedBoard:
+				for c in copiedBoard:
+					if copiedBoard[r][c] == '':
+						copiedBoard[r][c] = computer 
+						score = impBot.minimax(copiedBoard, False)
+						copiedBoard[r][c] = ''
+						if score > bestScore:
+							bestScore = score
+			return bestScore 
+		else:
+			bestScore = 800 
+			for r in copiedBoard:
+				for c in copiedBoard:
+					if copiedBoard[r][c] == '':
+						copiedBoard[r][c] = p1 
+						score = impBot.minimax(copiedBoard, True)
+						copiedBoard[r][c] = ''
+						if score < bestScore:
+							bestScore = score 
+			return bestScore
+		
+	def checkWhichMarkWon(mark):
+		if (copiedBoard[0][0] == copiedBoard[0][1] and copiedBoard[0][0] == copiedBoard[0][2] and copiedBoard[0][0] == mark):
+			return True
+		elif (copiedBoard[1][0] == copiedBoard[1][1] and copiedBoard[1][0] == copiedBoard[1][2] and copiedBoard[1][0] == mark):
+			return True
+		elif (copiedBoard[2][0] == copiedBoard[2][1] and copiedBoard[2][0] == copiedBoard[2][2] and copiedBoard[2][0] == mark):
+			return True
+		elif (copiedBoard[0][0] == copiedBoard[1][0] and copiedBoard[0][0] == copiedBoard[2][0] and copiedBoard[0][0] == mark):
+			return True
+		elif (copiedBoard[0][1] == copiedBoard[1][1] and copiedBoard[0][1] == copiedBoard[2][1] and copiedBoard[0][1] == mark):
+			return True
+		elif (copiedBoard[0][2] == copiedBoard[1][2] and copiedBoard[0][2] == copiedBoard[2][2] and copiedBoard[0][2] == mark):
+			return True
+		elif (copiedBoard[0][0] == copiedBoard[1][1] and copiedBoard[0][0] == copiedBoard[2][2] and copiedBoard[0][0] == mark):
+			return True
+		elif (copiedBoard[2][0] == copiedBoard[1][1] and copiedBoard[2][0] == copiedBoard[0][2] and copiedBoard[2][0] == mark):
+			return True
+		else:
+			return False
+		
+	def checkDraw():
+		for r in copiedBoard:
+			for c in copiedBoard:
+				if copiedBoard[r][c] == '':
+					return False 
+			return True
+
+
+		# check_if_tie()
+		# if norm_check_if_win() == False:
+		#     tie = messagebox.showinfo("tie","its tie")
+		#     return tie
+	def norm_check_if_win():
+		global stop_game
+		states = [
+			[0, 0, 0],
+			[0, 0, 0],
+			[0, 0, 0]
+		]
+	
+		for i in range(3):
+			if states[i][0] == states[i][1] == states[i][2] !=0:
+				stop_game = True
+	
+				#winner = messagebox.showinfo("Winner", states[i][0] + " Won")
+				# disableAllButton()
+				break
+	
+		#for j in range(3):
+			elif states [0][i] == states[1][i] == states[2][i] != 0:
+				stop_game = True
+	
+				#winner = messagebox.showinfo("Winner", states[0][i]+ " Won!")
+				break
+	
+			elif states[0][0] == states[1][1] == states[2][2] !=0:
+				stop_game = True
+	
+				#winner = messagebox.showinfo("Winner", states[0][0]+ " Won!")
+				break
+	
+			elif states[0][2] == states[1][1] == states[2][0] !=0:
+				stop_game = True
+	
+				#winner = messagebox.showinfo("Winner" , states[0][2]+ " Won!")
+				break
+	
+			elif states[0][0] and states[0][1] and states[0][2] and states[1][0] and states[1][1] and states[1][2] and states[2][0] and states[2][1] and states[2][2] != 0:
+				stop_game = True
+	
+				#winner = messagebox.showinfo("tie", "Tie")
+
+	def getPlayer():
+		return player
+
+	def switchPlayer():
+		if numPlayers == 1:
+			if impBot.getPlayer() == p1:
+				player = computer
+			elif impBot.getPlayer() == computer:
+				player = p1
+		else:
+			if impBot.getPlayer() == p1:
+				player = p2
+			elif impBot.getPlayer() == computer:
+				player = p2
 
 
 
@@ -428,8 +428,8 @@ def main():
             [[0,0,0], [0,0,0], [0,0,0]]]
 
 
-    getPlayer()
-    norm_check_if_win()
+    impBot.getPlayer()
+    impBot.norm_check_if_win()
 
     if gameMode == "norm":
         #normal game starter
