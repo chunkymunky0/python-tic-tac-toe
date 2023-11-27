@@ -159,13 +159,13 @@ class TicTacToeBoard(tk.Tk):
             #command=self.reset_board
             command = lambda: TicTacToeBoard.set_title(self, "Normal Game - Two Players")
         )
-        two_players.add_command(
+        """two_players.add_command(
             # Two Players (Game in a Game)
             #TicTacToeBoard.set_title(self, "Game in a Game - Two Players"),
             label="Game in a Game",
             #command=self.reset_board
             command = lambda: TicTacToeBoard.set_title(self, "Game in a Game - Two Players")
-        )
+        )"""
         one_player.add_cascade(label="Normal Bot", menu=normal_bot)
         normal_bot.add_command(
             # Single Player (Normal Game - Normal Bot)
@@ -174,13 +174,13 @@ class TicTacToeBoard(tk.Tk):
             #command=self.reset_board
             command = lambda: TicTacToeBoard.set_title(self, "Normal Game - Normal Bot")
         )
-        normal_bot.add_command(
+        """normal_bot.add_command(
             # Single Player (Game in a Game - Normal Bot)
             #TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot"),
             label="Game in a Game",
             #command=self.reset_board
             command = lambda: TicTacToeBoard.set_title(self, "Game in a Game - Normal Bot")
-        )
+        )"""
         one_player.add_command(
             #TicTacToeBoard.set_title(self, "Normal Game - Impossible Bot"),
             # Single Player (Impossible Bot)
