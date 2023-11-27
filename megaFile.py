@@ -17,6 +17,13 @@ copiedBoard = [['', '', ''], ['', '', ''], ['', '', '']]
 bestMoveR = ''
 bestMoveC = ''
 
+
+
+
+# TicTacToeBoard stuff
+
+
+
 class TicTacToeBoard(tk.Tk):
     def __init__(self, titleName = "Tic-Tac-Toe Game"):
         super().__init__()
@@ -205,6 +212,14 @@ class TicTacToeBoard(tk.Tk):
 
             self.player_turn = 'O' if self.player_turn == 'X' else 'X'
 
+
+
+
+
+# impossible Bot Stuff
+
+
+
 def copyBoard():
     for r in copiedBoard:
         for c in copiedBoard:
@@ -353,18 +368,24 @@ def norm_check_if_win():
 
 def switchPlayer():
     if numPlayers == 1:
-        if player == p1:
+        if getPlayer() == p1:
             player = computer
-        elif player == computer:
+        elif getPlayer() == computer:
             player = p1
     else:
         if player == p1:
             player = p2
-        elif player == computer:
+        elif getPlayer() == computer:
             player = p2
 
 def getPlayer():
     return player
+
+
+
+
+# main
+
 
 def main():
     """Create the game's board and run its main loop."""
