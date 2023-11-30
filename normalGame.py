@@ -108,7 +108,7 @@ class TicTacToeBoard(tk.Tk):
             elif self.check_for_tie():
                 self.display_message("It's a tie!")
 
-            if "Computer" in self.get_title() and not self.check_for_win('O') and not self.check_for_tie():
+            if not self.check_for_win('X') and not self.check_for_win('O') and not self.check_for_tie() and "Computer" in self.get_title():
                 self.computer_move()
             else:
                 self.player_turn = 'O' if self.player_turn == 'X' else 'X'
