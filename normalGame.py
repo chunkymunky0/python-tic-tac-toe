@@ -2,6 +2,10 @@ import tkinter as tk
 from tkinter import font, messagebox
 import random
 
+computer = "O"
+p1 = "X"
+botTurn = False
+
 class TicTacToeBoard(tk.Tk):
     def __init__(self, title_name="Tic-Tac-Toe Game"):
         super().__init__()
@@ -46,6 +50,15 @@ class TicTacToeBoard(tk.Tk):
         self.title_name = new_name
         self.title(new_name)
         self.reset_board()
+
+    def get_game_board(self):
+        return self.game_state
+
+    def get_game_state(self, r, c):
+        return self.game_state(r, c)
+
+    def set_game_state(self, r, c, value):
+        self.game_state[r][c] = value
 
     def check_for_win(self, player):
         for row in range(3):
@@ -102,6 +115,7 @@ class TicTacToeBoard(tk.Tk):
         if button.cget("text") == "" and not self.check_for_win('X') and not self.check_for_win('O') and not self.check_for_tie():
             button.config(text=self.player_turn)
             self.game_state[row][col] = self.player_turn
+            botTurn = True
             
 
     def computer_move(self):
@@ -121,30 +135,32 @@ class TicTacToeBoard(tk.Tk):
         print("Player 1's Turn")
 
 
+
+
 class impBot():
     def __init__(self):
         self.copiedBoard = [['', '', ''], ['', '', ''], ['', '', '']]
         self.bestMoveR = ''
         self.bestMoveC = ''
 
-    def copyBoard(self):
+    def copyBoard(self, board):
         for r in self.copiedBoard:
             for c in self.copiedBoard:
-                self.copiedBoard[r][c] = TicTacToeBoard.getGameState(r,c)
+                self.copiedBoard[r][c] = board[r][c]
 
 
     def spaceAvailable(self, r, c):
-        if TicTacToeBoard.getGameState(r,c) == '':
+        if TicTacToeBoard.get_game_state(r,c) == '':
             return True 
         else:
             return False 
         
-    def get_possible_moves(self):
-        self.copyBoard(self)
+    def get_possible_moves(self, board):
+        self.copyBoard(self, board)
         for r in self.copiedBoard:
             for c in self.copiedBoard:
                 if self.copiedBoard[r][c] == '':
-                    self.copiedBoard[r][c] = TicTacToeBoard.computer
+                    self.copiedBoard[r][c] = computer
                     score = self.minimax(self.copiedBoard, False)
                     self.copiedBoard[r][c] = ''
                     if score > bestScore:
@@ -152,28 +168,28 @@ class impBot():
                 else:
                     self.copiedBoard[r][c] = ''
 
-    def impBotMove(self):
-
+    def impBotMove(self, board):
+        self.copyBoard(self, board)
         bestScore = -800
         r = 0
         c = 0
         for r in self.copiedBoard:
             for c in self.copiedBoard:
                 if self.copiedBoard[r][c] == '':
-                    self.copiedBoard[r][c] = TicTacToeBoard.computer
+                    self.copiedBoard[r][c] = computer
                     score = self.minimax(self.copiedBoard, False)
                     self.copiedBoard[r][c] = ''
                     if score > bestScore:
                         bestScore = score 
                         self.bestMoveR = r
                         self.bestMoveC = c
-        TicTacToeBoard.set_game_state(self.bestMoveR, self.bestMoveC, TicTacToeBoard.computer)
+        TicTacToeBoard.set_game_state(self, self.bestMoveR, self.bestMoveC, computer)
         return 
 
-    def minimax(self, isMaximizing):
-        if self.checkWhichMarkWon(TicTacToeBoard.computer):
+    def minimax(self, board, isMaximizing):
+        if self.checkWhichMarkWon(computer):
             return 1 
-        elif self.checkWhichMarkWon(TicTacToeBoard.p1):
+        elif self.checkWhichMarkWon(p1):
             return -1 
         elif self.checkDraw():
             return 0
@@ -183,7 +199,7 @@ class impBot():
             for r in self.copiedBoard:
                 for c in self.copiedBoard:
                     if self.copiedBoard[r][c] == '':
-                        self.copiedBoard[r][c] = TicTacToeBoard.computer 
+                        self.copiedBoard[r][c] = computer 
                         score = self.minimax(self.copiedBoard, False)
                         self.copiedBoard[r][c] = ''
                         if score > bestScore:
@@ -194,7 +210,7 @@ class impBot():
             for r in self.copiedBoard:
                 for c in self.copiedBoard:
                     if self.copiedBoard[r][c] == '':
-                        self.copiedBoard[r][c] = TicTacToeBoard.p1 
+                        self.copiedBoard[r][c] = p1 
                         score = self.minimax(self.copiedBoard, True)
                         self.copiedBoard[r][c] = ''
                         if score < bestScore:
@@ -202,6 +218,7 @@ class impBot():
             return bestScore
         
     def checkWhichMarkWon(self, mark):
+        self.copyBoard()
         if (self.copiedBoard[0][0] == self.copiedBoard[0][1] and self.copiedBoard[0][0] == self.copiedBoard[0][2] and self.copiedBoard[0][0] == mark):
             return True
         elif (self.copiedBoard[1][0] == self.copiedBoard[1][1] and self.copiedBoard[1][0] == self.copiedBoard[1][2] and self.copiedBoard[1][0] == mark):
@@ -220,30 +237,36 @@ class impBot():
             return True
         else:
             return False
-        
+                        
+    
     def checkDraw(self):
         for r in self.copiedBoard:
             for c in self.copiedBoard:
                 if self.copiedBoard[r][c] == '':
-                    return False 
+                    return False
+        return True
+        
+    def checkFinish(self):
+        self.copyBoard()
+        if self.checkWhichMarkWon(self, p1):
             return True
+        elif self.checkWhichMarkWon(self, computer):
+            return True
+        else:
+            return self.checkDraw(self)
 
 def main():
     bot = impBot()
     board = TicTacToeBoard()
     board.mainloop()
+    #botTurn = False
 
-    while not TicTacToeBoard.check_for_win('X') and not TicTacToeBoard.check_for_win('O') and not TicTacToeBoard.check_for_tie():
-        if TicTacToeBoard.check_for_win(TicTacToeBoard.player_turn):
-            TicTacToeBoard.display_message(f"{TicTacToeBoard.player_turn} wins!")
-        elif TicTacToeBoard.check_for_tie():
-            TicTacToeBoard.display_message("It's a tie!")
-
-        if not TicTacToeBoard.check_for_win('X') and not TicTacToeBoard.check_for_win('O') and not TicTacToeBoard.check_for_tie() and "Computer" in TicTacToeBoard.get_title():
-            #self.computer_move()
-            bot.impBotMove()
-        else:
-            TicTacToeBoard.player_turn = 'O' if TicTacToeBoard.player_turn == 'X' else 'X'
+    while not bot.checkFinish():
+        
+        if botTurn:
+            bot.impBotMove(TicTacToeBoard.get_game_board)
+            botTurn = False
+        #playerMove()
 
 if __name__ == "__main__":
     main()
