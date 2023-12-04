@@ -2,6 +2,22 @@ import tkinter as tk
 from tkinter import font, messagebox
 import random
 
+class SplashScreen(tk.Tk):
+    def __init__(self, title_name="Tic-Tac-Toe Game"):
+        super().__init__()
+        self.title_name = title_name
+        self.title(title_name)
+        self.geometry("750x750")
+        self.resizable(0, 0)
+        self.configure(bg="#3498db")
+        self.splash_label = tk.Label(text = "The Game will start in 5 seconds", font=("Times", 18))
+        self.splash_label.pack()
+        self.after(5000, self.show_main_window)
+
+    def show_main_window(self):
+        self.destroy()
+        TicTacToeBoard().mainloop
+
 class TicTacToeBoard(tk.Tk):
     def __init__(self, title_name="Tic-Tac-Toe Game"):
         super().__init__()
@@ -14,6 +30,10 @@ class TicTacToeBoard(tk.Tk):
         self.game_state = [['', '', ''], ['', '', ''], ['', '', '']]
         self._create_board_grid()
         self._create_menu()
+
+
+        
+        
 
     def _create_board_grid(self):
         for row in range(3):
@@ -126,9 +146,16 @@ class TicTacToeBoard(tk.Tk):
             elif self.check_for_tie():
                 self.display_message("It's a tie!")
 
-def main():
+def main_window():
+    
+    
     board = TicTacToeBoard()
     board.mainloop()
 
 if __name__ == "__main__":
-    main()
+    
+    
+    SplashScreen().mainloop()
+    
+    #main_window()
+    
