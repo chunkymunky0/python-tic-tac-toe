@@ -8,15 +8,25 @@ class SplashScreen(tk.Tk):
         self.title_name = title_name
         self.title(title_name)
         self.geometry("750x750")
+        self.time = 5
+        
         self.resizable(0, 0)
-        self.configure(bg="#3498db")
-        self.splash_label = tk.Label(text = "The Game will start in 5 seconds", font=("Times", 18))
-        self.splash_label.pack()
-        self.after(5000, self.show_main_window)
+        self.configure(bg="#FFFFFF")
 
-    def show_main_window(self):
-        self.destroy()
-        TicTacToeBoard().mainloop
+        self.splash_label = tk.Label(self, text="The Game will start in " + str(self.time), font=("Times", 18))
+        self.splash_label.pack(side="top", pady=200)
+
+        self.countdown()
+        
+
+    def countdown(self):
+        if self.time > 0:
+            self.time -= 1
+            self.splash_label.config(text="The Game will start in " + str(self.time))
+            self.after(1000, self.countdown)  
+        else:
+            self.destroy()
+            TicTacToeBoard().mainloop()
 
 class TicTacToeBoard(tk.Tk):
     def __init__(self, title_name="Tic-Tac-Toe Game"):
@@ -156,6 +166,6 @@ if __name__ == "__main__":
     
     
     SplashScreen().mainloop()
-    
+
     #main_window()
     
