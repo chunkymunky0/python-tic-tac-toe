@@ -2,7 +2,8 @@
 
 import tkinter as tk
 from itertools import cycle
-from tkinter import font, messagebox
+from tkinter import font, messagebox, ttk
+from tkinter import *
 from typing import NamedTuple
 
 
@@ -96,10 +97,10 @@ class TicTacToeGame:
         self.winner_combo = []
 
 
-class TicTacToeBoard(tk.Tk):
+class RegTicTacToeBoard(tk.Tk):
     def __init__(self, game):
         super().__init__()
-        self.title("Tic-Tac-Toe Game")
+        self.title("Regular Tic-Tac-Toe Game")
         self._cells = {}
         self._game = game
         self._create_menu()
@@ -110,10 +111,16 @@ class TicTacToeBoard(tk.Tk):
         menu_bar = tk.Menu(master=self)
         self.config(menu=menu_bar)
         file_menu = tk.Menu(master=menu_bar, tearoff="off")
+        multiplayer_menu = tk.Menu(master=menu_bar, tearoff="off")
+        singleplayer_menu = tk.Menu(master=menu_bar, tearoff="off")
         file_menu.add_command(label="Play Again", command=self.reset_board)
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=quit)
+        multiplayer_menu.add_command(label="Regular", command=self.reset_board)
         menu_bar.add_cascade(label="File", menu=file_menu)
+        menu_bar.add_cascade(label="Multiplayer", menu=multiplayer_menu)
+        menu_bar.add_cascade(label="Singleplayer", menu=singleplayer_menu)
+
 
     def _create_board_display(self):
         display_frame = tk.Frame(master=self)
@@ -192,14 +199,14 @@ class TicTacToeBoard(tk.Tk):
         self.win = Toplevel()
         self.win.title('Game Over')
         self.message = winMessage
-        self.Label(self.win, text=self.message).pack()
+        self.label(self.win, text=winMessage).pack()
         self.Button(self.win, text='Restart?', command=self.reset_board).pack()
 
 
 def main():
     """Create the game's board and run its main loop."""
     game = TicTacToeGame()
-    board = TicTacToeBoard(game)
+    board = RegTicTacToeBoard(game)
     board.mainloop()
 
 
