@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from itertools import cycle
-from tkinter import font
+from tkinter import font, messagebox
 from typing import NamedTuple
 
 
@@ -158,6 +158,7 @@ class TicTacToeBoard(tk.Tk):
             elif self._game.has_winner():
                 self._highlight_cells()
                 msg = f'Player "{self._game.current_player.label}" won!'
+                self.end_screen(msg)
                 color = self._game.current_player.color
                 self._update_display(msg, color)
             else:
@@ -186,6 +187,13 @@ class TicTacToeBoard(tk.Tk):
             button.config(highlightbackground="lightblue")
             button.config(text="")
             button.config(fg="black")
+
+    def end_screen(self, winMessage):
+        self.win = Toplevel()
+        self.win.title('Game Over')
+        self.message = winMessage
+        self.Label(self.win, text=self.message).pack()
+        self.Button(self.win, text='Restart?', command=self.reset_board).pack()
 
 
 def main():
